@@ -1,0 +1,80 @@
+﻿<Window x:Class="TTL.Launcher.Windows.MessageBoxWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TTL.Launcher.Windows"
+        mc:Ignorable="d"
+        Title="Tonic Trouble Launcher MkII" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        Height="180" Width="350"
+        SizeChanged="Window_SizeChanged">
+    
+    <Grid Background="#FF242232">
+
+        <!-- // Default Button Style // -->
+        <Grid.Resources>
+
+            <Style TargetType="{x:Type Button}">
+
+                <Setter Property="Background" Value="#FF33374D"/>
+                <Setter Property="Foreground" Value="LightGray"/>
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+
+                        <ControlTemplate TargetType="{x:Type Button}">
+
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#FF545066" BorderThickness="1">
+
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            </Border>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+                <Style.Triggers>
+
+                    <Trigger Property="IsMouseOver" Value="True">
+
+                        <Setter Property="Background" Value="#FF3A3E57"/>
+
+                    </Trigger>
+
+                    <Trigger Property="IsMouseCaptured" Value="True">
+
+                        <Setter Property="Background" Value="#FF2F3347"/>
+
+                    </Trigger>
+
+                </Style.Triggers>
+
+            </Style>
+
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="37"/>
+            
+        </Grid.RowDefinitions>
+        
+        <TextBlock x:Name="TBText" Text="" Width="250" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="70,0,0,0" Foreground="LightGray"/>
+
+        <Image Source="/Tonic Trouble Launcher;component/Resources/Images/mark.png" Stretch="Uniform" Height="50" Width="50" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0"/>
+
+        <Rectangle Fill="#FF353345" Grid.Row="1" />
+        <Rectangle Fill="DimGray" Grid.Row="1" Height="1" VerticalAlignment="Top"/>
+
+        <Button x:Name="BTLeft" Content="Apply" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" Width="70" Margin="-90,0,0,5" Cursor="Hand" Click="BTLeft_Click"/>
+        <Button x:Name="BTRight" Content="Cancel" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Height="25" Width="70" Margin="90,0,0,5" Cursor="Hand" Click="BTRight_Click"/>
+
+    </Grid>
+    
+</Window>

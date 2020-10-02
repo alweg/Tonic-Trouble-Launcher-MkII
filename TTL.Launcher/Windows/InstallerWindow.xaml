@@ -1,0 +1,45 @@
+﻿<Window x:Class="TTL.Launcher.InstallerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TTL.Launcher"
+        mc:Ignorable="d"
+        Title="Installs" Height="150" Width="450"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        ResizeMode="NoResize" SizeChanged="Window_SizeChanged" Loaded="Window_Loaded" Closing="Window_Closing"
+        FontFamily="Calibri" FontSize="14">
+
+    <Grid Background="#FF242232">
+
+        <Image Source="/Tonic Trouble Launcher;component/Resources/Images/guards.png" Margin="210,0,67,50" Opacity="0.20">
+
+            <Image.Effect>
+
+                <DropShadowEffect BlurRadius="2"/>
+
+            </Image.Effect>
+
+        </Image>
+
+        <StackPanel>
+
+            <Grid>
+                
+                <TextBlock Text="Installing, please wait..." HorizontalAlignment="Left" Margin="20,25,0,0" Foreground="LightGray"/>
+                <TextBlock x:Name="TBPercentage" Text="0%" HorizontalAlignment="Right" Margin="0,25,20,0" Foreground="LightGray"/>
+                
+            </Grid>
+
+            <Border BorderThickness="1" BorderBrush="#FF545066" Margin="20,5,20,0">
+                
+                <ProgressBar x:Name="PBLoading" Height="30"  Background="#FF353345" Foreground="#FFE07B41" BorderThickness="0"/>
+                
+            </Border>
+           
+            
+        </StackPanel>
+
+    </Grid>
+    
+</Window>

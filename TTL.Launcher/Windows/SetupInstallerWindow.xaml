@@ -1,0 +1,98 @@
+﻿<Window x:Class="TTL.Launcher.SetupInstallerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TTL.Launcher"
+        mc:Ignorable="d"
+        Title="Install" Height="240" Width="500"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        ResizeMode="NoResize" SizeChanged="Window_SizeChanged" Loaded="Window_Loaded" Closing="Window_Closing"
+        FontFamily="Calibri" FontSize="14">
+    
+    <Grid Background="#FF242232">
+
+        <!-- // Default Button Style // -->
+        <Grid.Resources>
+            
+            <Style TargetType="{x:Type Button}">
+
+                <Setter Property="Background" Value="#FF353345"/>
+                <Setter Property="Foreground" Value="LightGray"/>
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+
+                        <ControlTemplate TargetType="{x:Type Button}">
+
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#FF545066" BorderThickness="1">
+
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            </Border>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+                <Style.Triggers>
+
+                    <Trigger Property="IsMouseOver" Value="True">
+
+                        <Setter Property="Background" Value="#FF3F3C52"/>
+
+                    </Trigger>
+
+                    <Trigger Property="IsMouseCaptured" Value="True">
+
+                        <Setter Property="Background" Value="#FF312E40"/>
+
+                    </Trigger>
+
+                </Style.Triggers>
+
+            </Style>
+            
+        </Grid.Resources>
+        
+        <Image Source="/Tonic Trouble Launcher;component/Resources/Images/ed.png" Margin="381,74,-1,-10" Opacity="0.20">
+
+            <Image.Effect>
+
+                <DropShadowEffect BlurRadius="2"/>
+
+            </Image.Effect>
+
+        </Image>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <TextBlock Text="Location:" Margin="0,0,5,5" Foreground="LightGray"/>
+            <StackPanel Orientation="Horizontal">
+
+                <TextBox x:Name="TBOXDestination" Text="C:\UbiSoft\" Width="400" VerticalContentAlignment="Center" IsReadOnly="True" Background="#FF33374D" Foreground="LightGray" BorderBrush="#FF545066" TextChanged="TBOXDestination_TextChanged"/>
+                <Button x:Name="BTBrowse" Content="..." Width="30" Height="25" Margin="5,0,0,0" Click="BTBrowse_Click" Cursor="Hand"/>
+
+            </StackPanel>
+
+            <TextBlock Text="Folder Name:" Margin="0,15,0,0" Foreground="LightGray"/>
+
+            <TextBox x:Name="TBOXFolderName" Width="400" Height="25" Margin="0,5,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Background="#FF33374D" Foreground="LightGray" BorderBrush="#FF545066" TextChanged="TBOXFolderName_TextChanged" IsReadOnly="True"/>
+
+            <CheckBox x:Name="CBNameFolder" Content="Name folder the same as the version" Margin="0,5,0,0" Foreground="LightGray" IsChecked="True" Click="CheckBox_Click"/>
+            
+            <StackPanel Orientation="Horizontal">
+
+                <Button x:Name="BTInstall" Content="Install" Width="100" Height="30" HorizontalAlignment="Left" Margin="0,14,0,0" Click="BTInstall_Click" Cursor="Hand"/>
+                <Button x:Name="BTCancel" Content="Cancel" Width="100" Height="30" HorizontalAlignment="Left" Margin="10,14,0,0" Click="BTCancel_Click" Cursor="Hand"/>
+                
+            </StackPanel>
+            
+        </StackPanel>
+
+    </Grid>
+    
+</Window>

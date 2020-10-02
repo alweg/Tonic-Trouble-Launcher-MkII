@@ -1,0 +1,191 @@
+﻿<Window x:Class="TTL.Launcher.GameSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TTL.Launcher"
+        mc:Ignorable="d"
+        Title="Game Settings" Height="328" Width="700" 
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        ResizeMode="NoResize" SizeChanged="Window_SizeChanged" Loaded="Window_Loaded" Closing="Window_Closing" 
+        FontFamily="Calibri" FontSize="14">
+
+    <Grid Background="#FF242232">
+        
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="42"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <!-- // Default Button Style // -->
+        <Grid.Resources>
+
+            <Style TargetType="{x:Type Button}">
+
+                <Setter Property="Background" Value="#FF33374D"/>
+                <Setter Property="Foreground" Value="LightGray"/>
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+
+                        <ControlTemplate TargetType="{x:Type Button}">
+
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#FF545066" BorderThickness="1">
+
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            </Border>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+                <Style.Triggers>
+
+                    <Trigger Property="IsMouseOver" Value="True">
+
+                        <Setter Property="Background" Value="#FF3A3E57"/>
+
+                    </Trigger>
+
+                    <Trigger Property="IsMouseCaptured" Value="True">
+
+                        <Setter Property="Background" Value="#FF2F3347"/>
+
+                    </Trigger>
+
+                </Style.Triggers>
+
+            </Style>
+
+        </Grid.Resources>
+
+        <!-- // Video Settings // -->
+        <StackPanel>
+
+            <Border Height="20" BorderBrush="#FF545066" BorderThickness="1" VerticalAlignment="Top" Margin="5,10,6,0">
+
+                <TextBlock Text="Video Settings" TextAlignment="Center" HorizontalAlignment="Stretch" Background="#FF353344" Foreground="LightGray"/>
+
+            </Border>
+            
+            <TextBlock Text="Resolution:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,8,0,0"/>
+            <ComboBox x:Name="CBResolution" Margin="20,5,21,5" Foreground="#FF353345"/>
+
+            <TextBlock Text="Texture Filtering:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,3,0,0"/>
+            <ComboBox x:Name="CBTextureFiltering"  Margin="20,5,21,5" Foreground="#FF353345"/>
+
+            <TextBlock Text="Anti-Aliasing:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,3,0,0"/>
+            <ComboBox x:Name="CBAntiAliasing"  Margin="20,5,21,5" Foreground="#FF353345"/>
+
+            <TextBlock Text="Bilinear Blit Stretch:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,3,0,0"/>
+            <Rectangle Height="1" HorizontalAlignment="Stretch" Margin="10,3,12,3" Fill="#FF545066"/>
+            <Grid>
+                <RadioButton x:Name="RBBilinearOn" Content="On" HorizontalAlignment="Left" Margin="60,5,62,5" Foreground="LightGray"/>
+                <RadioButton x:Name="RBBilinearOff" Content="Off" HorizontalAlignment="Right" Margin="60,5,62,5" Foreground="LightGray"/>
+            </Grid>
+
+        </StackPanel>
+
+        <!-- // Separator Left // -->
+        <Rectangle Width="1" HorizontalAlignment="Right" Margin="0,5" Fill="#FF545066"/>
+
+        <!-- // Other Settings // -->
+        <StackPanel Grid.Column="1">
+
+            <Border Height="20" BorderBrush="#FF545066" BorderThickness="1" VerticalAlignment="Top" Margin="5,10,6,0">
+
+                <TextBlock Text="Other Settings" TextAlignment="Center" HorizontalAlignment="Stretch" Background="#FF353344" Foreground="LightGray"/>
+
+            </Border>
+
+            <TextBlock Text="Fullscreen:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,8,1,0"/>
+            <Rectangle Height="1" HorizontalAlignment="Stretch" Margin="10,3,12,3" Fill="#FF545066"/>
+            <Grid>
+                <RadioButton x:Name="RBFullscreenOn" Content="On" HorizontalAlignment="Left" Margin="60,5,62,5" Foreground="LightGray"/>
+                <RadioButton x:Name="RBFullscreenOff" Content="Off" HorizontalAlignment="Right" Margin="60,5,62,5" Foreground="LightGray"/>
+            </Grid>
+
+            <TextBlock Text="DGVoodoo Watermark:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,15,1,0"/>
+            <Rectangle Height="1" HorizontalAlignment="Stretch" Margin="10,3,12,3" Fill="#FF545066"/>
+            <Grid>
+                <RadioButton x:Name="RBVoodooWMOn" Content="On" HorizontalAlignment="Left" Margin="60,5,62,5" Foreground="LightGray"/>
+                <RadioButton x:Name="RBVoodooWMOff" Content="Off" HorizontalAlignment="Right" Margin="60,5,62,5" Foreground="LightGray"/>
+            </Grid>
+
+            <TextBlock Text="App-Controlled Window State" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,15,1,0"/>
+            <Rectangle Height="1" HorizontalAlignment="Stretch" Margin="10,3,12,3" Fill="#FF545066"/>
+            <Grid>
+                <RadioButton x:Name="RBAPPStateOn" Content="On" HorizontalAlignment="Left" Margin="60,5,62,5" Foreground="LightGray"/>
+                <RadioButton x:Name="RBAPPStateOff" Content="Off" HorizontalAlignment="Right" Margin="60,5,62,5" Foreground="LightGray"/>
+            </Grid>
+
+        </StackPanel>
+
+        <!-- // Separator Right // -->
+        <Rectangle Grid.Column="1" Width="1" HorizontalAlignment="Right" Margin="0,5" Fill="#FF545066"/>
+        
+        <!-- // Game Settings // -->
+        <StackPanel Grid.Column="2">
+
+            <Border Height="20" BorderBrush="#FF545066" BorderThickness="1" VerticalAlignment="Top" Margin="5,10,6,0">
+
+                <TextBlock Text="Game Settings" TextAlignment="Center" HorizontalAlignment="Stretch" Background="#FF353344" Foreground="LightGray"/>
+
+            </Border>
+
+            <TextBlock Text="Language:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,8,1,0"/>
+            <ComboBox x:Name="CBLanguage"  Margin="20,5,21,5" Foreground="#FF353345"/>
+
+            <TextBlock Text="Re-Install DGVoodoo:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,8,1,0"/>
+            <Rectangle Height="1" HorizontalAlignment="Stretch" Margin="10,3,12,3" Fill="#FF545066"/>
+
+            <Grid>
+
+                <CheckBox x:Name="CBResetDGVoodooConfig" Content="Yes" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45,0" Foreground="LightGray" Click="CBResetDGVoodooConfig_Click"/>
+                <Button x:Name="BTResetDGVoodooConfig" Content="Re-Install" Height="25" Width="70" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="45,10" Click="BTResetDGVoodooConfig_Click" IsEnabled="False" Cursor="Hand"/>
+
+            </Grid>
+
+            <TextBlock x:Name="TBInstallIndeo" Text="Install Indeo Drivers:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,8,1,0"/>
+            <Rectangle Height="1" HorizontalAlignment="Stretch" Margin="10,3,12,3" Fill="#FF545066"/>
+
+            <Grid>
+
+                <CheckBox x:Name="CBInstallIndeo" Content="Yes" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45,0" Foreground="LightGray" Click="CBReinstallIndeo_Click"/>
+                <Button x:Name="BTInstallIndeo" Content="Install" Height="25" Width="70" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="45,10" Click="BTReinstallIndeo_Click" IsEnabled="False" Cursor="Hand"/>
+
+            </Grid>
+
+        </StackPanel>
+
+        <!-- // Buttons // -->
+        <Grid Grid.Row="1" Grid.ColumnSpan="3">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.ColumnSpan="2" Fill="#FF353345"/>
+            <Rectangle Grid.ColumnSpan="2" Fill="DimGray" Height="1" VerticalAlignment="Top"/>
+            <Button x:Name="BTSave" Content="Save" Height="30" MaxWidth="150" Margin="200,5,5,5" Click="BTSave_Click" Cursor="Hand"/>
+            <Button x:Name="BTCancel" Grid.Column="1" Content="Cancel" Height="30" MaxWidth="150" Margin="5,5,200,5" Click="BTCancel_Click" Cursor="Hand"/>
+
+        </Grid>
+        
+    </Grid>
+    
+</Window>

@@ -1,0 +1,143 @@
+﻿<Window x:Class="TTL.Launcher.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TTL.Launcher"
+        mc:Ignorable="d"
+        Title="Launcher Settings" Height="300" Width="450" 
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False" Loaded="Window_Loaded" 
+        ResizeMode="NoResize" SizeChanged="Window_SizeChanged"
+        FontFamily="Calibri" FontSize="14">
+
+    <Grid Background="#FF242232">
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="42"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+
+        <!-- // Default Button Style // -->
+        <Grid.Resources>
+
+            <Style TargetType="{x:Type Button}">
+
+                <Setter Property="Background" Value="#FF33374D"/>
+                <Setter Property="Foreground" Value="LightGray"/>
+
+                <Setter Property="Template">
+
+                    <Setter.Value>
+
+                        <ControlTemplate TargetType="{x:Type Button}">
+
+                            <Border Background="{TemplateBinding Background}" BorderBrush="#FF545066" BorderThickness="1">
+
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            </Border>
+
+                        </ControlTemplate>
+
+                    </Setter.Value>
+
+                </Setter>
+
+                <Style.Triggers>
+
+                    <Trigger Property="IsMouseOver" Value="True">
+
+                        <Setter Property="Background" Value="#FF3A3E57"/>
+
+                    </Trigger>
+
+                    <Trigger Property="IsMouseCaptured" Value="True">
+
+                        <Setter Property="Background" Value="#FF2F3347"/>
+
+                    </Trigger>
+
+                </Style.Triggers>
+
+            </Style>
+
+        </Grid.Resources>
+
+        <!-- // General Settings // -->
+        <Border Height="20" BorderBrush="#FF545066" BorderThickness="1" VerticalAlignment="Top" Margin="5,10,6,0">
+
+            <TextBlock Text="General" TextAlignment="Center" HorizontalAlignment="Stretch" Background="#FF353344" Foreground="LightGray"/>
+
+        </Border>
+        <StackPanel>
+
+            <TextBlock Text="Minimize Launcher on game launch:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,60,1,0"/>
+            <Rectangle Height="1" HorizontalAlignment="Stretch" Margin="11,3" Fill="#FF545066"/>
+
+            <Grid>
+                <RadioButton x:Name="RBMinimizeYes" Content="Yes" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="55,15" Foreground="LightGray"/>
+                <RadioButton x:Name="RBMinimizeNo"  Content="No" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="55,15" Foreground="LightGray"/>
+            </Grid>
+
+            <TextBlock Text="Show Discord Status while playing:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,15,1,0"/>
+            <Rectangle Height="1" HorizontalAlignment="Stretch" Margin="11,3" Fill="#FF545066"/>
+
+            <Grid>
+                <RadioButton x:Name="RBDiscordYes" Content="Yes" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="55,15" Foreground="LightGray"/>
+                <RadioButton x:Name="RBDiscordNo" Content="No" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="55,15" Foreground="LightGray"/>
+            </Grid>
+
+        </StackPanel>
+
+        <!-- // Separator (Center) -->
+        <Rectangle Grid.ColumnSpan="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="1" Margin="-1, 5, 0, 5" Fill="#FF545066"/>
+
+        <!-- // Advanced Settings // -->
+        <Border Grid.Column="1" Height="20" BorderBrush="#FF545066" BorderThickness="1" VerticalAlignment="Top" Margin="5,10,5,0">
+
+            <TextBlock Text="Advanced" TextAlignment="Center" HorizontalAlignment="Stretch" Background="#FF353344" Foreground="LightGray"/>
+
+        </Border>
+        <StackPanel Grid.Column="1">
+
+            <TextBlock Text="Remove all settings:" TextAlignment="Center" Foreground="LightGray" Margin="0, 60, 0, 0"/>
+            <Rectangle Height="1" Margin="10,3,13,3" Fill="#FF545066"/>
+
+            <Grid>
+
+                <CheckBox x:Name="CBReset" Content="Yes" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="45, 0" Foreground="LightGray" Click="CBReset_Click"/>
+                <Button x:Name="BTReset" Content="Reset" Height="25" Width="70" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="45, 10" Click="BTReset_Click" IsEnabled="False" Cursor="Hand"/>
+
+            </Grid>
+
+        </StackPanel>
+
+        <!-- // Buttons // -->
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle Grid.ColumnSpan="2" Fill="#FF353345"/>
+            <Rectangle Grid.ColumnSpan="2" Height="1" VerticalAlignment="Top" Fill="DimGray"/>
+
+            <Button x:Name="BTSave" Content="Save" MaxWidth="160" Height="30" HorizontalAlignment="Stretch" Margin="5" Click="BTSave_Click" Cursor="Hand"/>
+            <Button x:Name="BTCancel" Grid.Column="1" Content="Cancel" MaxWidth="160" Height="30" HorizontalAlignment="Stretch" Margin="5" Click="BTCancel_Click" Cursor="Hand"/>
+
+        </Grid>
+
+        <TextBlock x:Name="TBVersion" Grid.Column="1" TextAlignment="Center" Foreground="Gray" FontSize="10" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="2, 0, 0, 2"/>
+
+    </Grid>
+
+</Window>
