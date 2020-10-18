@@ -25,7 +25,18 @@ namespace TTL.Launcher
 
         public MainWindow()
         {
-            InitializeComponent();
+            try { InitializeComponent(); }
+            catch (System.Windows.Markup.XamlParseException e)
+            {
+                if (e.InnerException.Message.ToLower().Contains("cntlib"))
+                {
+                    System.Windows.MessageBox.Show(this, "Cannot find CntLib.dll. Launcher closes.", "Error", MessageBoxButton.OK); this.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.MessageBox.Show(this, $"Error: {e.Message}. \n\nLauncher closes.", "Error", MessageBoxButton.OK);
+            }
             DiscordRPC.RPCApp.RPC.Server.RPCServer.DoWork += DiscordRPC.RPCApp.RPC.Server.Update;
             totalPlaytime.Elapsed += TotalPlaytime_Tick;
 
@@ -119,7 +130,8 @@ namespace TTL.Launcher
             Config.Properties.Set("LastDiscordTimeMinutes", lastTime.Minute);
             Config.Properties.Set("LastDiscordTimeSeconds", lastTime.Second);
 
-            MessageBox.MessageBox.ShowDialog(this, "Wouups, something went badly wrong. Launcher crashed.", "Error", "OK");
+            Exception ee = (Exception)e.ExceptionObject;
+            MessageBox.MessageBox.ShowDialog(this, $"Wouups, something went badly wrong. \n\nError: {ee.Message} \n\nLauncher closes.", "Error", "OK");
         }
 
         private async void Window_Initialized(object sender, EventArgs e)
