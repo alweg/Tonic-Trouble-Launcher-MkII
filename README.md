@@ -14,7 +14,7 @@ A Launcher for **Tonic Trouble**
 * [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
 
 ## Other
-* You can find more useful tools for **Tonic Trouble** on my [Google Site](https://sites.google.com/view/tonictrouble).
+* You can find more useful tools for **Tonic Trouble** on my [Google Site](https://sites.google.com/view/tonictrouble)
 
 ## Releases
 https://github.com/alweg/Tonic-Trouble-Launcher-MkII/releases
