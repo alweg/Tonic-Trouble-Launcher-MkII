@@ -76,7 +76,7 @@
             <Button x:Name="BTWiki" Content="Wiki" Width="60" Margin="6,6,6,7" Click="BTWiki_Click" Cursor="Hand"/>
             <Button x:Name="BTDiscord" Content="Discord" Width="60" Margin="6,6,6,7" Click="BTDiscord_Click" Cursor="Hand"/>
             <Button x:Name="BTSRC" Content="SRC" Width="60" Margin="6,6,6,7" Click="BTSRC_Click" Cursor="Hand"/>
-            <Button x:Name="DEBUGBUTTON" Content="DEBUG" Width="80" Margin="85,6,6,7" Click="DEBUGBUTTON_Click" Cursor="Hand" Visibility="Visible"/>
+            <Button x:Name="DEBUGBUTTON" Content="DEBUG" Width="80" Margin="85,6,6,7" Click="DEBUGBUTTON_Click" Cursor="Hand" Visibility="Hidden"/>
 
         </StackPanel>
         <StackPanel Grid.RowSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">

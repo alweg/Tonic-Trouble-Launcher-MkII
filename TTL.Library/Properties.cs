@@ -4,7 +4,7 @@
     public static class Properties
     {
         /// <summary> The launcher's version. </summary>
-        public static readonly string _LauncherVersion = "2.0.3";
+        public static readonly string _LauncherVersion = "2.0.4";
 
         /// <summary> DGVoodoo's version. </summary>
         public static readonly string _DGVoodooVersion = "2.7";
