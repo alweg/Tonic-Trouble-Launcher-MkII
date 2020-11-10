@@ -25,18 +25,8 @@ namespace TTL.Launcher
 
         public MainWindow()
         {
-            try { InitializeComponent(); }
-            catch (System.Windows.Markup.XamlParseException e)
-            {
-                if (e.InnerException.Message.ToLower().Contains("cntlib"))
-                {
-                    System.Windows.MessageBox.Show(this, "Cannot find CntLib.dll. Launcher closes.", "Error", MessageBoxButton.OK); this.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                System.Windows.MessageBox.Show(this, $"Error: {e.Message}. \n\nLauncher closes.", "Error", MessageBoxButton.OK);
-            }
+            InitializeComponent();
+
             DiscordRPC.RPCApp.RPC.Server.RPCServer.DoWork += DiscordRPC.RPCApp.RPC.Server.Update;
             totalPlaytime.Elapsed += TotalPlaytime_Tick;
 
@@ -44,6 +34,21 @@ namespace TTL.Launcher
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // checks if launcher is obsolete and dgvoodoo needs an update
+            if (Config.Exists())
+            {
+                if (Config.IsObsolete())
+                {
+                    string[] versions = Config.Version.GetAll();
+                    for (int i = 0; i < versions.Length; i++)
+                    {
+                        Config.Version.Properties.Set(versions[i], "Update", 1);
+                    }
+                    Config.Update();
+                }
+            }
+            else { Config.Create(); }
+
             // starts or stops discord rpc server
             if ((int)Config.Properties.Get("ShowDiscordStatus") == 1)
             {
@@ -62,17 +67,6 @@ namespace TTL.Launcher
                 Config.Properties.Set("LastDiscordTimeHours", 0);
                 Config.Properties.Set("LastDiscordTimeMinutes", 0);
                 Config.Properties.Set("LastDiscordTimeSeconds", 0);
-            }
-
-            // checks if launcher is obsolete and dgvoodoo needs an update
-            if (Config.IsObsolete())
-            {
-                string[] versions = Config.Version.GetAll();
-                for (int i = 0; i < versions.Length; i++)
-                {
-                    Config.Version.Properties.Set(versions[i], "Update", 1);
-                }
-                Config.Update();
             }
 
             // updates library
@@ -344,7 +338,7 @@ namespace TTL.Launcher
             if (repairVersion == null)
             {
                 if (MessageBox.MessageBox.ShowDialog(this, "Please select a folder where the game is located." +
-                "\n\nNote: you can select a folder or select a disc drive / mounted image.", "Information", "OKCancel") == false) { return; }
+                "\n\nNote: You can select a folder or a disc drive / mounted image.", "Information", "OKCancel") == false) { return; }
             }
 
             var cfd = new CommonOpenFileDialog
@@ -1100,7 +1094,7 @@ namespace TTL.Launcher
         private void DEBUGBUTTON_Click(object sender, RoutedEventArgs e)
         {
             // causes crash
-            // File.Move("","");
+            //File.Move("","");
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Windows;
 using TTLib;
-using TTL.CntLib;
 
 namespace TTL.Launcher
 {
@@ -205,9 +204,44 @@ namespace TTL.Launcher
                 }
 
                 // installs dgvoodoo files
-                if (version != "SE-V8.1.0") { DGVoodoo.Install(path, CntLib.Properties.Resources.D3D8, CntLib.Properties.Resources.D3DImm, CntLib.Properties.Resources.DDraw, null); }
-                else { DGVoodoo.Install(path, null, null, null, CntLib.Properties.Resources.Glide2x); }
+                if (version != "SE-V8.1.0") 
+                {
+                    try { DGVoodoo.Install(path, CntLib.Properties.Resources.D3D8, CntLib.Properties.Resources.D3DImm, CntLib.Properties.Resources.DDraw, null); }
+                    catch 
+                    {
+                        if (File.Exists($"{path}\\D3D8.dll")) 
+                        {
+                            File.SetAttributes($"{path}\\D3D8.dll", FileAttributes.Normal);
+                            File.Delete($"{path}\\D3D8.dll"); 
+                        }
+                        if (File.Exists($"{path}\\D3DImm.dll")) 
+                        {
+                            File.SetAttributes($"{path}\\D3DImm.dll", FileAttributes.Normal);
+                            File.Delete($"{path}\\D3DImm.dll"); 
+                        }
+                        if (File.Exists($"{path}\\DDraw.dll")) 
+                        {
+                            File.SetAttributes($"{path}\\DDraw.dll", FileAttributes.Normal);
+                            File.Delete($"{path}\\DDraw.dll"); 
+                        }
 
+                        DGVoodoo.Install(path, CntLib.Properties.Resources.D3D8, CntLib.Properties.Resources.D3DImm, CntLib.Properties.Resources.DDraw, null);
+                    }
+                }
+                else 
+                {
+                    try { DGVoodoo.Install(path, null, null, null, CntLib.Properties.Resources.Glide2x); }
+                    catch
+                    {
+                        if (File.Exists($"{path}\\Glide2x.dll")) 
+                        {
+                            File.SetAttributes($"{path}\\Glide2x.dll", FileAttributes.Normal);
+                            File.Delete($"{path}\\Glide2x.dll"); 
+                        }
+
+                        DGVoodoo.Install(path, null, null, null, CntLib.Properties.Resources.Glide2x);
+                    }
+                }
                 // checks & installs controller support
                 if (!File.Exists($"{path}dinput.dll")) { File.WriteAllBytes($"{path}dinput.dll", CntLib.Properties.Resources.dinput); }
 

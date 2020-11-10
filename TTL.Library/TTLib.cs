@@ -420,7 +420,7 @@ namespace TTLib
         public static bool IsObsolete()
         {
             var _rk = Registry.LocalMachine.OpenSubKey($"{TTLib.Properties._LauncherKeyPath}", true);
-            if ((string)_rk.GetValue("Version") != TTLib.Properties._LauncherVersion)
+            if ((string)_rk.GetValue("Version") == null || (string)_rk.GetValue("Version") != TTLib.Properties._LauncherVersion)
             {
                 _rk.Close(); return true;
             }
@@ -762,7 +762,7 @@ namespace TTLib
                     try { File.Delete($"{_ir32x64_86}_ttl.bak"); }
                     catch (UnauthorizedAccessException)
                     {
-                        FileAccess.GetAccessOfFile($"{_ir32x64_86}_ttl.bak");
+                        FileAccess.GetAccess($"{_ir32x64_86}_ttl.bak");
                         File.Delete($"{_ir32x64_86}_ttl.bak");
                     }
                 }
@@ -770,7 +770,7 @@ namespace TTLib
                 try { File.Move(_ir32x64_86, $"{_ir32x64_86}_ttl.bak"); }
                 catch (UnauthorizedAccessException)
                 {
-                    FileAccess.GetAccessOfFile(_ir32x64_86);
+                    FileAccess.GetAccess(_ir32x64_86);
                     File.Move(_ir32x64_86, $"{_ir32x64_86}_ttl.bak");
                 }
             }
@@ -782,7 +782,7 @@ namespace TTLib
                     try { File.Delete($"{_ir41x64_86}_ttl.bak"); }
                     catch (UnauthorizedAccessException)
                     {
-                        FileAccess.GetAccessOfFile($"{_ir41x64_86}_ttl.bak");
+                        FileAccess.GetAccess($"{_ir41x64_86}_ttl.bak");
                         File.Delete($"{_ir41x64_86}_ttl.bak");
                     }
                 }
@@ -790,7 +790,7 @@ namespace TTLib
                 try { File.Move(_ir41x64_86, $"{_ir41x64_86}_ttl.bak"); }
                 catch (UnauthorizedAccessException)
                 {
-                    FileAccess.GetAccessOfFile(_ir41x64_86);
+                    FileAccess.GetAccess(_ir41x64_86);
                     File.Move(_ir41x64_86, $"{_ir41x64_86}_ttl.bak");
                 }
             }
@@ -823,14 +823,14 @@ namespace TTLib
                 try { File.Delete(_ir32x64_86); }
                 catch (UnauthorizedAccessException) 
                 {
-                    FileAccess.GetAccessOfFile(_ir32x64_86); 
+                    FileAccess.GetAccess(_ir32x64_86); 
                     File.Delete(_ir32x64_86);
                 }
 
                 try { File.Move($"{_ir32x64_86}_ttl.bak", _ir32x64_86); }
                 catch (UnauthorizedAccessException) 
                 {
-                    FileAccess.GetAccessOfFile($"{_ir32x64_86}_ttl.bak");
+                    FileAccess.GetAccess($"{_ir32x64_86}_ttl.bak");
                     File.Move($"{_ir32x64_86}_ttl.bak", _ir32x64_86);
                 }
             }
@@ -840,7 +840,7 @@ namespace TTLib
                 try { File.Delete(_ir41x64_86); }
                 catch (UnauthorizedAccessException)
                 {
-                    FileAccess.GetAccessOfFile(_ir41x64_86);
+                    FileAccess.GetAccess(_ir41x64_86);
                     File.Delete(_ir41x64_86);
                 }
                 if (File.Exists($"{_ir41x64_86}_ttl.bak"))
@@ -848,14 +848,14 @@ namespace TTLib
                     try { File.Move($"{_ir41x64_86}_ttl.bak", _ir41x64_86); }
                     catch (UnauthorizedAccessException)
                     {
-                        FileAccess.GetAccessOfFile(_ir41x64_86);
+                        FileAccess.GetAccess(_ir41x64_86);
                         File.Move($"{_ir41x64_86}_ttl.bak", _ir41x64_86);
                     }
                 }
             }
 
-            if (File.Exists(_ir32x64_86)) { FileAccess.RevertAccessOfFile(_ir32x64_86); }
-            if (File.Exists(_ir41x64_86)) { FileAccess.RevertAccessOfFile(_ir41x64_86); }
+            if (File.Exists(_ir32x64_86)) { FileAccess.RevertAccess(_ir32x64_86); }
+            if (File.Exists(_ir41x64_86)) { FileAccess.RevertAccess(_ir41x64_86); }
         }
 
         /// <summary> Manages the executable of the game. </summary>
@@ -969,13 +969,13 @@ namespace TTLib
     public class FileAccess
     {
         /// <summary> Gets full control of a file. </summary>
-        /// <param name="_fileName"> Name of the file to get access of. </param>
-        public static void GetAccessOfFile(string _fileName)
+        /// <param name="_filePath"> Full path to the file to get access of. </param>
+        public static void GetAccess(string _filePath)
         {
             var _pi = new ProcessStartInfo()
             {
                 FileName = "cmd.exe",
-                Arguments = $"/k takeown /f {_fileName} && icacls {_fileName} /grant %userdomain%\\Administrators:F"
+                Arguments = $"/k takeown /f \"{_filePath}\" && icacls \"{_filePath}\" /grant %userdomain%\\Administrators:F"
             };
             _pi.UseShellExecute = true;
             _pi.Verb = "runas";
@@ -984,28 +984,28 @@ namespace TTLib
             _p.Start();
 
             var _usid = WindowsIdentity.GetCurrent().User;
-            var _fs = File.GetAccessControl(_fileName);
+            var _fs = File.GetAccessControl(_filePath);
             var _fsid = _fs.GetOwner(typeof(SecurityIdentifier));
 
             while (_usid != _fsid)
             {
-                _fs = File.GetAccessControl(_fileName);
+                _fs = File.GetAccessControl(_filePath);
                 _fsid = _fs.GetOwner(typeof(SecurityIdentifier));
             }
             _p.Kill();
 
             _fs.AddAccessRule(new FileSystemAccessRule(_usid, FileSystemRights.FullControl, AccessControlType.Allow));
-            File.SetAccessControl(_fileName, _fs);
+            File.SetAccessControl(_filePath, _fs);
         }
 
         /// <summary> Gets full control of a file. </summary>
-        /// <param name="_fileName"> Name of the file to get access of. </param>
-        public static void RevertAccessOfFile(string _fileName)
+        /// <param name="_filePath"> Full path to the file to revert the access of. </param>
+        public static void RevertAccess(string _filePath)
         {
             var _pi = new ProcessStartInfo()
             {
                 FileName = "cmd.exe",
-                Arguments = $"/k icacls {_fileName} /setowner \"NT SERVICE\\TrustedInstaller\""
+                Arguments = $"/k icacls {_filePath} /setowner \"NT SERVICE\\TrustedInstaller\""
             };
             _pi.UseShellExecute = true;
             _pi.Verb = "runas";
@@ -1014,12 +1014,12 @@ namespace TTLib
             _p.Start();
 
             var _usid = WindowsIdentity.GetCurrent().User;
-            var _fs = File.GetAccessControl(_fileName);
+            var _fs = File.GetAccessControl(_filePath);
             var _fsid = _fs.GetOwner(typeof(SecurityIdentifier));
 
             while (_usid == _fsid)
             {
-                _fs = File.GetAccessControl(_fileName);
+                _fs = File.GetAccessControl(_filePath);
                 _fsid = _fs.GetOwner(typeof(SecurityIdentifier));
             }
             _p.Kill();
