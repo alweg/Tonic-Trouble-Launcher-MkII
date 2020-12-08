@@ -1,6 +1,6 @@
 # Screenshots
+<img src="Screenshots/Launcher.png" Width="330"/>
 <p float="left">
-  <img src="Screenshots/Launcher.png" Width="330"/>
   <img src="Screenshots/GameSettings.png" Width="350" />
   <img src="Screenshots/LauncherSettings.png" Width="200"/>
 </p>
