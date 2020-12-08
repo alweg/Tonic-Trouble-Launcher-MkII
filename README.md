@@ -1,9 +1,7 @@
-# Screenshots
-<img src="Screenshots/Launcher.png" Width="330"/>
-<p float="left">
-  <img src="Screenshots/GameSettings.png" Width="350" />
-  <img src="Screenshots/LauncherSettings.png" Width="200"/>
-</p>
+## Screenshots
+<img src="Screenshots/Launcher.png"/>
+<img src="Screenshots/GameSettings.png" />
+<img src="Screenshots/LauncherSettings.png"/>
 
 # Description - [Latest Release](https://github.com/alweg/Tonic-Trouble-Launcher-MkII/releases)
 A Launcher for **Tonic Trouble**
