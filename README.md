@@ -19,6 +19,7 @@ A Launcher for **Tonic Trouble**
 * [Newtonsoft.Json](https://github.com/JamesNK/Newtonsoft.Json)
 
 ## Other
+* The Launcher comes with [dgVoodoo](http://dege.freeweb.hu/dgVoodoo2/ReadmeDirectX/) made by [dege-diosg](https://github.com/dege-diosg)/[diosg-dege](https://github.com/diosg-dege) which actually does all the magic. You can find more information on [VOGONS](https://www.vogons.org/viewforum.php?f=59/)
 * You can find more useful tools for **Tonic Trouble** on my [Google Site](https://sites.google.com/view/tonictrouble)
 
 ## Releases
