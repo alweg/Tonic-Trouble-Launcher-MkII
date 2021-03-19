@@ -87,7 +87,7 @@
                 <RadioButton x:Name="RBMinimizeNo"  Content="No" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="55,15" Foreground="LightGray"/>
             </Grid>
 
-            <TextBlock Text="Show Discord Status while playing:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,15,1,0"/>
+            <TextBlock Text="Show Discord Status:" TextAlignment="Center" HorizontalAlignment="Stretch" Foreground="LightGray" Margin="0,15,1,0"/>
             <Rectangle Height="1" HorizontalAlignment="Stretch" Margin="11,3" Fill="#FF545066"/>
 
             <Grid>

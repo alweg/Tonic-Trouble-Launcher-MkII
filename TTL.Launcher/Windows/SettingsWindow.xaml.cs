@@ -16,7 +16,7 @@ namespace TTL.Launcher
             mainWindow = _mainWindow;
             this.Owner = _mainWindow;
 
-            TBVersion.Text = $"Launcher Version: {Properties._LauncherVersion} | DGVoodoo Version: {Properties._DGVoodooVersion}";
+            TBVersion.Text = $"Launcher Version: {Properties._LauncherVersion}";
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {

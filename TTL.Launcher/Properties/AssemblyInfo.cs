@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Tonic Trouble Community")]
 [assembly: AssemblyProduct("TTL")]
-[assembly: AssemblyCopyright("Copyright © Eddd 2019 - 2020")]
+[assembly: AssemblyCopyright("Copyright © Eddd 2019 - 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

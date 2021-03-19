@@ -34,7 +34,7 @@ namespace TTL.Launcher
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // checks if launcher is obsolete and dgvoodoo needs an update
+            /* checks if launcher is obsolete and dgvoodoo needs an update
             if (Config.Exists())
             {
                 if (Config.IsObsolete())
@@ -47,7 +47,7 @@ namespace TTL.Launcher
                     Config.Update();
                 }
             }
-            else { Config.Create(); }
+            else { Config.Create(); }*/
 
             // starts or stops discord rpc server
             if ((int)Config.Properties.Get("ShowDiscordStatus") == 1)
@@ -229,18 +229,6 @@ namespace TTL.Launcher
                 Config.Properties.Set("LastDiscordTimeHours", 0);
                 Config.Properties.Set("LastDiscordTimeMinutes", 0);
                 Config.Properties.Set("LastDiscordTimeSeconds", 0);
-            }
-            else if ((string)BTPlay.Content == "Update (!)")
-            {
-                if (MessageBox.MessageBox.ShowDialog(this, $"DGVoodoo version has been updated to version {Properties._DGVoodooVersion}.\n\n{version.Remove(0, 3)} needs an update. \n" +
-                    "Update now?", "Information", "YesNo") == true)
-                {
-                    string path = (string)Config.Version.Properties.Get(version, "Path");
-                    if (version.ToLower() != "se-v8.1.0") { DGVoodoo.Install(path, CntLib.Properties.Resources.D3D8, CntLib.Properties.Resources.D3DImm, CntLib.Properties.Resources.DDraw, null); }
-                    else { DGVoodoo.Install(path, null, null, null, CntLib.Properties.Resources.Glide2x); }
-                    Config.Version.Properties.Set(version, "Update", 0);
-                    UpdateLibrary();
-                }
             }
             else { UpdateLibrary(); return; }
         }
@@ -517,22 +505,6 @@ namespace TTL.Launcher
                     ToggleGameDetails(true, true, false, false, true, true, true, true);
                 }
 
-                // if version needs an update
-                if (Config.Version.NeedsUpdate(version))
-                {
-                    var lbi = GetSelectedVersionItem();
-                    if (lbi != null)
-                    {
-                        lbi.Content = $"{version.Remove(0, 3)} (Warning)";
-                        lbi.Foreground = Brushes.Red;
-                        ToggleGameDetails(true, true, true, true, false, true, true, true);
-                    }
-                }
-                else
-                {
-                    ToggleGameDetails(true, true, false, false, true, true, true, true);
-                }
-
                 // sets location
                 string path = (string)Config.Version.Properties.Get(version, "Path");
                 if (path.ToLower() == "unset")
@@ -725,17 +697,6 @@ namespace TTL.Launcher
                         lb.Items.Add(lbt); continue;
                     }
 
-                    // if update needs an update then add version with a warning
-                    if (Config.Version.NeedsUpdate(version[i]))
-                    {
-                        var lbt = new ListBoxItem
-                        {
-                            Content = $"{version[i].Remove(0, 3)} (Warning)",
-                            Foreground = Brushes.Red
-                        };
-                        lb.Items.Add(lbt); continue;
-                    }
-
                     // if everything is O.K then add version normally
                     lb.Items.Add(version[i].Remove(0, 3));
                 }
@@ -793,9 +754,6 @@ namespace TTL.Launcher
 
             if (fixButton) { BTPlay.Content = "Fix (!)"; }
             else if (!fixButton && (string)BTPlay.Content != "Stop") { BTPlay.Content = "Play"; }
-
-            if (updateButton) { BTPlay.Content = "Update (!)"; }
-            else if (!updateButton && (string)BTPlay.Content != "Stop") { BTPlay.Content = "Play"; }
 
             if (settingsButton) { BTGameSettings.IsEnabled = true; }
             else { BTGameSettings.IsEnabled = false; }

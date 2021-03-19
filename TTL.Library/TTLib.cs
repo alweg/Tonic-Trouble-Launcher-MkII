@@ -128,17 +128,6 @@ namespace TTLib
                 return _v.ToArray();
             }
 
-            /// <summary> Checks if version needs an update. </summary> 
-            /// <param name="_gameVersion"> The game version to check. </param>
-            public static bool NeedsUpdate(string _gameVersion)
-            {
-                if ((int)Config.Version.Properties.Get(_gameVersion, "Update") == 1)
-                {
-                    return true;
-                }
-                return false;
-            }
-
             /// <summary> Manages properties of a version. </summary> 
             public class Properties
             {

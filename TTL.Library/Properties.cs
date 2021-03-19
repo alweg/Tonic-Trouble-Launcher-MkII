@@ -4,10 +4,7 @@
     public static class Properties
     {
         /// <summary> The launcher's version. </summary>
-        public static readonly string _LauncherVersion = "2.0.4";
-
-        /// <summary> DGVoodoo's version. </summary>
-        public static readonly string _DGVoodooVersion = "2.7";
+        public static readonly string _LauncherVersion = "2.0.5";
 
         /// <summary> Path to the launcher's root registry key. </summary>
         public static readonly string _LauncherRootKeyPath = @"Software\TTL\";
@@ -62,7 +59,7 @@
             "DGVoodooWatermark", "Fullscreen",
             "ResWidth", "ResHeight", "AntiAliasing", "TextureFiltering",
             "BilinearBlitStretch", "AppControlledWindowState", "TotalHour", "TotalMin",
-            "LastDay", "LastMonth", "LastYear", "Size", "Update"
+            "LastDay", "LastMonth", "LastYear", "Size"
         };
 
         /// <summary> Collection of default version properties (string) </summary>
@@ -74,7 +71,7 @@
         /// <summary> Collection of default version properties (dword) </summary>
         public static readonly int[] _DefaultVersionPropertiesDWord =
         {
-            0, 0, 1024, 768, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0
+            0, 0, 1024, 768, 0, 4, 1, 0, 0, 0, 0, 0, 0, 0
         };
 
         /// <summary> Collection of valid launcher properties (string) </summary>
